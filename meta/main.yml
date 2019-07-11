@@ -1,7 +1,7 @@
 ---
 dependencies: []
 galaxy_info:
-  role_name: wazuh-host-setup
+  role_name: wazuh-setup
   author: tmeralus
   description: Install/Setup Wazuh with ELK Stack
   issue_tracker_url: https://github.com/tmeralus/ansible-role-wazuh-setup/issues

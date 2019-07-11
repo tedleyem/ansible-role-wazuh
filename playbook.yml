@@ -1,0 +1,6 @@
+---
+- hosts: all
+  roles:
+    - { role: tmeralus.elk_stack }
+
+  - import_tasks: "tasks/main.yml"
