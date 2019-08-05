@@ -38,4 +38,9 @@
     state: started
     enabled: yes
 
+#install kibana plugin
+- name: Start Wazuh Manager
+  command: "sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install {{ wazuh_kibana_curl }}"  
+  become: true
+
 - import_tasks: api.yml
