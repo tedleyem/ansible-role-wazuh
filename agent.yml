@@ -45,4 +45,4 @@
     enabled: yes
 
 - name: Connect wazuh-ahent
-  command: /var/ossec/bin/agent-auth -m 172.16.120.42
+  command: "/var/ossec/bin/agent-auth -m {{ wazuh_manager_ip }}"

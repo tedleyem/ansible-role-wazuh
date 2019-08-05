@@ -1,5 +1,5 @@
 ---
-dependencies: []
+dependencies: ['tmeralus.elk_stack']
 galaxy_info:
   role_name: wazuh-setup
   author: tmeralus

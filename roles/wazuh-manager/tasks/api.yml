@@ -1,0 +1,39 @@
+---
+#- include: redhat-setup.yml
+#  when: ansible_distribution == "RedHat"
+
+# Copy and install new repos and packages
+- name:  Copy Bulk Repos
+  template:
+    src: "{{ item }}"
+    dest: "/etc/yum.repos.d/"
+  with_items:
+    - "repo/wazuh.repo.j2"
+    - "repo/atomic.repo.j2"
+    - "repo/elastic.repo.j2"
+
+#Install atomiccorp keys for wazuh dependancies
+- name: Import Atomicorp GPG Keys
+  rpm_key:
+    state: present
+    key: "{{ item }}"
+  with_items:
+    - "{{ atomic_art_key }}"
+    - "{{ atomic_gpg_key }}"
+
+# Remove old versions of ossec
+- name:  remove ossec-hids-agent and ossec-hids
+  yum:
+    name: ['ossec-hids', 'ossec-hids-agent']
+    state: absent
+
+- name:  Install wazuh and filebeat pci pacakges
+  yum:
+    name: ['wazuh-manager',]
+    state: present
+
+- name: Start Wazuh Manager
+  service:
+    name: wazuh-api
+    state: started
+    enabled: yes

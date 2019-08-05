@@ -1,2 +1,6 @@
 ---
-# defaults file for test-role-1
+install_wazuh_agent: true
+wazuh_manager_ip: 172.16.120.42
+atomic_art_key: "https://www.atomicorp.com/RPM-GPG-KEY.art.txt"
+atomic_gpg_key: "https://www.atomicorp.com/RPM-GPG-KEY.atomicorp.txt"
+ 
