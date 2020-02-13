@@ -9,3 +9,4 @@
     - { role: elasticsearch }
     - { role: wazuh-manager }
     - { role: wazuh-agent }
+    - { role: instructions }
