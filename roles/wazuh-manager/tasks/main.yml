@@ -48,6 +48,6 @@
   become: true
 
 #install kibana plugin
-- name: Start Wazuh Manager
+- name: Insatll  kibana plugin for Wazuh Manager
   command: "sudo -u kibana NODE_OPTIONS= --max-old-space-size=3072 /usr/share/kibana/bin/kibana-plugin install {{ wazuh_kibana_curl }}"
-  become: true 
+  become: true
