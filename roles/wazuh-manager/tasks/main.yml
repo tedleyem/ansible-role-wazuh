@@ -3,14 +3,21 @@
 #  when: ansible_distribution == "RedHat"
 
 # Copy and install new repos and packages
-- name:  Copy Bulk Repos
+- name:  Copy Atomic Repos
   template:
-    src: "{{ item }}"
-    dest: "/etc/yum.repos.d/"
-  with_items:
-    - "repo/wazuh.repo.j2"
-    - "repo/atomic.repo.j2"
-    - "repo/elastic.repo.j2"
+    src: "repo/atomic.repo.j2"
+    dest: "/etc/yum.repos.d/atomic.repo"
+    mode: 0644
+  become: true
+
+# Copy and install new repos and packages
+- name:  Copy Wazuh Repos
+  template:
+    src: "repo/wazuh.repo.j2"
+    dest: "/etc/yum.repos.d/wazuh.repo"
+    mode: 0644
+  become: true
+
 
 #Install atomiccorp keys for wazuh dependancies
 - name: Import Atomicorp GPG Keys
@@ -40,7 +47,7 @@
 
 #install kibana plugin
 - name: Start Wazuh Manager
-  command: "sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install {{ wazuh_kibana_curl }}"  
+  command: "sudo -u kibana NODE_OPTIONS= --max-old-space-size=3072 /usr/share/kibana/bin/kibana-plugin install {{ wazuh_kibana_curl }}"
   become: true
 
 - import_tasks: api.yml
